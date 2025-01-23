@@ -70,16 +70,20 @@ practicing fastAPI
 
 ---
 
-3. Routers: - structure your application/operations into files and components - allow us to share a prefix btw multiple opeartions(if we have different blogs, different users) - allows us to share tags between operations
+3. Routers:
 
-   in the blog_get.py file:
-   from fastapi import APIRouter
-   router = APIRouter(prefix='/blog', tags=['blog'])
-   @router.get('/')
-   in the main.py:
-   from routers import blog
-   app = fastAPI()
-   app.include.router(blog.router)
+- structure your application/operations into files and components
+- allow us to share a prefix btw multiple opeartions(if we have different blogs, different users)
+- allows us to share tags between operations
+
+  in the blog_get.py file:
+  from fastapi import APIRouter
+  router = APIRouter(prefix='/blog', tags=['blog'])
+  @router.get('/')
+  in the main.py:
+  from routers import blog
+  app = fastAPI()
+  app.include.router(blog.router)
 
 - Routers
 - Refactoring the app into logical components
