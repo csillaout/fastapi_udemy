@@ -2,7 +2,7 @@
 
 practicing fastAPI
 
-Get method:
+1. Get method:
 
 - path parameters - value that we pass on the path and we can use it in our function like:
 
@@ -27,3 +27,43 @@ Get method:
   @app.get('/blog/all')
   def get_blogs(page, page_size):
   return {'message': f"All {page_size} blogs on page {page}"}
+
+---
+
+2. Operation description overview
+
+- Status code: indicates the outcome of an operation, front end heavily relies on it: there are a few ways of doing this(for this you need to import status)
+  @app.get('/blog/{id}', status_code=404)
+  def get_blog(id: int):
+  if id>5:
+  return {'error': f"Blog{id} not found"}
+  else:
+  return {'message':f"blog with id {id}!"}
+
+  other way(we need to import Response):
+  @app.get('/blog/{id}', status_code=status.HTTP_200_OK)
+  def get_blog(id: int, response: Response):
+  if id>5:
+  response.status_code = status.HTTP_404_NOT_FOUND
+  return {'error': f"Blog {id} not found"}
+  else:
+  response.status_code=status.HTTP_200_OK
+  return {'message':f"blog with id {id}!"}
+
+- Tags:
+  - Categorize operations: @app.get('/blog/all', tags=['blog'])
+  - Multiple categories
+- Summary and description: info regarding operation
+  - @app.get(
+    '/blog/all',
+    tags=['blog'],
+    summary="Retrieve all blogs",
+    description='This API call simulates fetching all blogs')
+    -"""
+    Simulates retrieving a comment of a blog
+    - **id** mandatory path parameter
+    - **comment_id** mandatory path parameter
+    - **valid** optional query prameter
+    - **username** optional query prameter
+      """
+- Response description: info about the output
