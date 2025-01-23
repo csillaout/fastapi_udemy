@@ -67,3 +67,7 @@ practicing fastAPI
     - **username** optional query prameter
       """
 - Response description: info about the output
+
+---
+
+3. Path
