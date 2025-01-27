@@ -1,6 +1,8 @@
-from fastapi import APIRouter, status, Response
+from router.blog_post import required_functionality
+from fastapi import APIRouter, status, Response, Depends
 from typing import Optional
 from enum import Enum
+
 
 #integrating router
 router = APIRouter(
@@ -17,11 +19,14 @@ router = APIRouter(
     summary="Retrieve all blogs",
     description='This API call simulates fetching all blogs', 
     response_description= "The list of available blogs")
-def get_blogs(page=1, page_size: Optional[int] = None):
-    return {'message': f"All {page_size} blogs on page {page}"}
+def get_blogs(page=1, page_size: Optional[int] = None, req_parameter: dict = Depends(required_functionality)):
+    return {
+        'message': f"All {page_size} blogs on page {page}", 
+        "message": req_parameter['message']
+        }
 
 @router.get('/{id}/comments/{comment_id}', tags=['comment'])
-def get_comment(id: int, comment_id: int, valid: bool = True, username: Optional[str] = None):
+def get_comment(id: int, comment_id: int, valid: bool = True, username: Optional[str] = None, req_parameter: dict = Depends(required_functionality)):
     """
     Simulates retrieving a comment of a blog
     - **id** mandatory path parameter
@@ -29,7 +34,9 @@ def get_comment(id: int, comment_id: int, valid: bool = True, username: Optional
     - **valid** optional query prameter
     - **username** optional query prameter
     """
-    return {'message': f"blog_id {id}, comment_id {comment_id}, valid {valid}, username {username}"}
+    return {'message': f"blog_id {id}, comment_id {comment_id}, valid {valid}, username {username}",
+    'additional message': req_parameter['message']
+    }
 
 #predefine paramaters:
 class BlogType(str, Enum):

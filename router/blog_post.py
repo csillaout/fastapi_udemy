@@ -52,3 +52,6 @@ comment_id: int = Path(..., gt=5, le=10)
         'v':v,
         'comment_id':comment_id
     }
+
+def required_functionality():
+    return {"message": "Learning fastAPI is important "}
