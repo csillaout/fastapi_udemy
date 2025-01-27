@@ -21,7 +21,7 @@ practicing fastAPI
   def blog_type(type: BlogType):
   return {'message': f"Blog type: {type}"}
 
-- query parameters: everything you write fater the / separated by ? and &
+- query parameters: everything you write after the / separated by ? and &
   (any function not part of the path are query parameters)
   it can be page_size, page
   @app.get('/blog/all')
@@ -88,3 +88,15 @@ practicing fastAPI
 - Routers
 - Refactoring the app into logical components
 - Adding a second router
+
+---
+
+4. Parameters overview
+
+- Request body: POST method, use pydantic BaseModel, it reads request body as JSON, validates data, convert data, JSON schema
+- Path and query parameters: blog:BlogModul - body paramether
+- Parameter metadata: information in the docs, using the query, path and body imports. We can add title, description, alias and depreation
+- Validators: validate the data we pass to our paramaters, require minimum lenght, require maximum lenght, regex validation
+- Multiple Values: for query parameters
+- Number validators
+- Complex subtypes
